@@ -2,9 +2,9 @@ all: shellcode
 
 CC=gcc
 CFLAGS= -g -z execstack -fno-stack-protector
-speed_test: shellcode.o
+shellcode: shellcode.o
 	$(CC) $(CFLAGS) -o shellcode shellcode.o
-speed_test.o:speed_test.c
+shellcode.o:shellcode.c
 	$(CC) $(CFLAGS) -c shellcode.c
 	
 clean:
