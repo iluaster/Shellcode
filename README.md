@@ -28,7 +28,7 @@ The output :
   400509:       c3                      ret    
   40050a:       66 0f 1f 44 00 00       nop    WORD PTR [rax+rax*1+0x0]
 </pre>
-You will call 0x601060 address in the main function.(in my computer, it's different in yours)
+It will call 0x601060 address in the main function.(in my computer, it's different in yours)
 
 <pre>
 0000000000601060  <code>&lt;shellcode&gt;</code> :
