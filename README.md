@@ -4,6 +4,7 @@ In the exploit code, you don't know the address of function(printf...) in advanc
 
 > make
 
+GCC flags:
 -z execstack: Since our shellcode is in the stack segment,we must set it executable in the link-time.  
 -fno-stack-protector: To remove the guard variable that detecting stack smash attack in the function epilogue.
 
