@@ -1,6 +1,6 @@
 # Shellcode
 
-In the exploit code, you don't know the address of function(printf...) in advance,so you have to leverage system call to execute it.
+In the exploit code, you don't know the address of function(printf,socket...) in advance,so you have to leverage system call to execute it.
 
 > make
 <pre>
