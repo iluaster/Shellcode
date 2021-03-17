@@ -9,7 +9,10 @@ In the exploit code, you don't know the address of function(printf...) in advanc
 
 > objdump -D -M intel shellcode | less
 
-00000000004004ed <main>:
+The output :
+<pre>
+  00000000004004ed  <code>&lt;main&gt;</code> :
+
   4004ed:       55                      push   rbp
   4004ee:       48 89 e5                mov    rbp,rsp
   4004f1:       48 83 ec 10             sub    rsp,0x10
@@ -21,10 +24,11 @@ In the exploit code, you don't know the address of function(printf...) in advanc
   400508:       c9                      leave  
   400509:       c3                      ret    
   40050a:       66 0f 1f 44 00 00       nop    WORD PTR [rax+rax*1+0x0]
-
+</pre>
 You will call 0x601060 address in the main function.(in my computer, it's different in yours)
 
-0000000000601060 <shellcode>:
+<pre>
+0000000000601060  <code>&lt;shellcode&gt;</code> :
   601060:       48 b8 48 45 4c 4c 4f    movabs rax,0x94f4c4c4548
   601067:       09 00 00 
   60106a:       48 bb 00 00 00 00 00    movabs rbx,0x10000000000
@@ -39,14 +43,15 @@ You will call 0x601060 address in the main function.(in my computer, it's differ
   601092:       48 c7 c0 3c 00 00 00    mov    rax,0x3c
   601099:       48 c7 c7 00 00 00 00    mov    rdi,0x0
   6010a0:       0f 05                   syscall 
-
+</pre>
 Here is the shellcode we insert.
-
+<pre>
 movabs rax,0x94f4c4c4548
 movabs rbx,0x10000000000
 add    rax,rbx
 string 'HELLO\n' in little-endian format.
-
+</pre>
+<pre>
 push   rax
 push string to the top of stack.
 
@@ -57,5 +62,5 @@ mov    rax,0x1 //the write system call
 syscall  //call system call
 mov    rax,0x3c //the exit system call
 mov    rdi,0x0 //the exit status(return value)
-
+</pre>
 Linux system call table: https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md
